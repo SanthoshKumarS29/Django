@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kp5*lz3l^#u+2ob9g#h9^4u-253(^dg_@@sjrz*@*c)66olikl'
+# SECRET_KEY = 'django-insecure-kp5*lz3l^#u+2ob9g#h9^4u-253(^dg_@@sjrz*@*c)66olikl'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -92,23 +97,24 @@ WSGI_APPLICATION = 'backendCode.wsgi.application'
 #     }
 # }
 
-DATABASES = {     
-'default': {         
-'ENGINE': 'django.db.backends.mysql',         
-'NAME': 'eas_regfrom',         
-'USER': 'eas_admin',        
-'PASSWORD': 'eas_Admin@1234',         
-'HOST': 'localhost',  # 'localhost' if the database is on the same machine         
-'PORT': '3306',  # Usually '3306'     
-} }
+DATABASES = { 
+    'default': { 
+        'ENGINE': 'django.db.backends.postgresql', 
+        'NAME': os.getenv('DATABASE_NAME'), 
+        'USER': os.getenv('DATABASE_USER'), 
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'), 
+        'HOST': os.getenv('DATABASE_HOST'), 
+        'PORT': os.getenv('DATABASE_PORT'), 
+        }
+}
 
 # settings.py
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '625001inskumar@gmail.com'
-EMAIL_HOST_PASSWORD = 'oxiu urrh rhob oluz'
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 
 # Password validation
